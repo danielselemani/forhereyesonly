@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Her</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="page-purple">
+
+  <!-- Star background -->
+  <div class="stars"></div>
+
+  <!-- MENU (same on every page) -->
+  <header class="header">
+    <a class="brand" href="index.html">💌 Daniel</a>
+
+    <nav class="nav-desktop">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="surprise.html">Surprise</a>
+      <a class="nav-link active" href="her.html">Her</a>
+      <a class="nav-link" href="read-this-out-loud.html">Read This Out Loud</a>
+      <a class="nav-link" href="meet-me-here.html">Meet Me Here</a>
+    </nav>
+
+    <button class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Audio -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="LaurynHill.mp4" type="audio/mpeg">
+  </audio>
+
+  <main class="her-wrap">
+
+    <!-- HERO -->
+    <section class="hero">
+      <h1>Her.</h1>
+      <h2>Listen to the lyrics while reading</h2>
+      <p class="subtitle">
+        Not just beautiful.<br>
+        Not just soft.<br>
+        But unforgettable.
+      </p>
+
+      <div class="portrait">
+        <img src="Tany6.jpeg" alt="Tany">
+      </div>
+    </section>
+
+    <!-- WHAT I SEE -->
+    <section class="see">
+      <div class="left">
+        <p>Your softness.</p>
+        <p>Your quiet strength.</p>
+        <p>The way you carry yourself.</p>
+        <p>The calm in your presence.</p>
+        <p>The depth behind your eyes.</p>
+      </div>
+
+      <div class="right-glow"></div>
+    </section>
+
+    <!-- FIRST TIME -->
+    <section class="first">
+      <p>
+        The first time I saw you,<br>
+        I didn’t know your name.<br>
+        But I knew I wanted to.
+      </p>
+    </section>
+
+    <!-- FINAL -->
+    <section class="final">
+      <p>
+        You are not just your beauty.<br>
+        You are your mind.<br>
+        Your heart.<br>
+        Your presence.<br>
+        Your entire energy.
+      </p>
+
+      <p class="seen">
+        You are seen.
+      </p>
+    </section>
+
+  </main>
+
+  <script>
+    const music = document.getElementById("bgMusic");
+
+    async function tryPlay() {
+      try {
+        await music.play();
+      } catch (e) {}
+    }
+
+    // Attempt autoplay
+    window.addEventListener("load", tryPlay);
+
+    // If blocked, first click anywhere plays
+    document.addEventListener("click", tryPlay, { once: true });
+
+    // Hamburger logic
+    const hamburger = document.getElementById("hamburger");
+    hamburger?.addEventListener("click", () => {
+      document.querySelector(".nav-desktop").classList.toggle("show");
+    });
+  </script>
+
+</body>
+</html>

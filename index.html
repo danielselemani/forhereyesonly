@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Will You Be My Valentine?</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Petals -->
+  <div class="petals" aria-hidden="true">
+    <span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span>
+    <span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span>
+    <span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span>
+  </div>
+
+  <!-- Header / Nav -->
+  <header class="header">
+    <a class="brand" href="index.html">💌 Daniel</a>
+
+    <nav class="nav-desktop" aria-label="Primary navigation">
+      <a class="nav-link active" href="index.html">Home</a>
+      <a class="nav-link" href="surprise.html">Surprise</a>
+      <a class="nav-link" href="her.html">Her</a>
+      <a class="nav-link" href="read-this-out-loud.html">Read This Out Loud</a>
+      <a class="nav-link" href="meet-me-here.html">Meet Me Here</a>
+    </nav>
+
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
+    <div class="menu-panel">
+      <button class="close" id="closeMenu" aria-label="Close menu">✕</button>
+
+      <div class="menu-links">
+        <a href="index.html" class="menu-link">Home</a>
+        <a href="surprise.html" class="menu-link">Landing</a>
+        <a href="her.html" class="menu-link">Her</a>
+        <a href="read-this-out-loud.html" class="menu-link">Read This Out Loud</a>
+        <a href="meet-me-here.html" class="menu-link">Meet Me Here</a>
+      </div>
+
+      <p class="menu-note">Made with love by Daniel.</p>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <main class="wrap">
+    <section class="card">
+      <div class="photo-float">
+        <img src="Tany4.jpeg" alt="Tany" class="photo" />
+        <div class="glow" aria-hidden="true"></div>
+      </div>
+
+      <h1>Tany Mantadidi</h1>
+      <h1>Will you be my Valentine?</h1>
+      <p class="line">
+        there's no escape to this i'm sorry <span class="heart">♥</span>
+      </p>
+
+      <div class="buttons">
+        <a class="btn primary" href="surprise.html" id="yes1">Yes</a>
+        <a class="btn primary" href="meet-me-here.html" id="yes2">Yes</a>
+      </div>
+
+      <!-- Audio: put your mp3 in the same folder or /assets -->
+      <audio id="song" preload="auto" loop>
+        <!-- Option A: same folder -->
+        <source src="BenEKingStandByMe.mp4" type="audio/mpeg" />
+        <!-- Option B: assets folder -->
+        <!-- <source src="assets/BenEKingStandByMe.mp3" type="audio/mpeg" /> -->
+      </audio>
+
+      <button class="mini" id="playSong" type="button">🔊 Play song</button>
+      <p class="tiny">If it doesn’t autoplay, tap “Play song” once (phones block autoplay sometimes).</p>
+    </section>
+  </main>
+
+  <script>
+    // Hamburger menu
+    const hamburger = document.getElementById("hamburger");
+    const overlay = document.getElementById("menuOverlay");
+    const closeMenu = document.getElementById("closeMenu");
+
+    function openMenu() {
+      overlay.classList.add("open");
+      overlay.setAttribute("aria-hidden", "false");
+      hamburger.setAttribute("aria-expanded", "true");
+      document.body.classList.add("no-scroll");
+    }
+    function closeIt() {
+      overlay.classList.remove("open");
+      overlay.setAttribute("aria-hidden", "true");
+      hamburger.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("no-scroll");
+    }
+
+    hamburger.addEventListener("click", openMenu);
+    closeMenu.addEventListener("click", closeIt);
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) closeIt();
+    });
+
+    // Song controls (autoplay often blocked; we try + provide manual)
+    const song = document.getElementById("song");
+    const playBtn = document.getElementById("playSong");
+
+    async function tryPlay() {
+      try { await song.play(); } catch (e) {}
+    }
+
+    // Try on load (may fail silently)
+    window.addEventListener("load", tryPlay);
+
+    // Guaranteed play on any user interaction
+    playBtn.addEventListener("click", tryPlay);
+    document.getElementById("yes1").addEventListener("click", tryPlay);
+    document.getElementById("yes2").addEventListener("click", tryPlay);
+  </script>
+</body>
+</html>

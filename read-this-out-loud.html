@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Read This Out Loud</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="page-letter">
+
+  <!-- MENU -->
+  <header class="header">
+    <a class="brand" href="index.html">💌 Daniel</a>
+
+    <nav class="nav-desktop" aria-label="Primary navigation">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="surprise.html">Surprise</a>
+      <a class="nav-link" href="her.html">Her</a>
+      <a class="nav-link active" href="read-this-out-loud.html">Read This Out Loud</a>
+      <a class="nav-link" href="meet-me-here.html">Meet Me Here</a>
+    </nav>
+
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
+    <div class="menu-panel pink-menu">
+      <button class="close" id="closeMenu" aria-label="Close menu">✕</button>
+      <div class="menu-links">
+        <a href="index.html" class="menu-link">Home</a>
+        <a href="surprise.html" class="menu-link">Surprise</a>
+        <a href="her.html" class="menu-link">Her</a>
+        <a href="read-this-out-loud.html" class="menu-link">Read This Out Loud</a>
+        <a href="meet-me-here.html" class="menu-link">Meet Me Here</a>
+      </div>
+      <p class="menu-note">Tany & Daniel 💗</p>
+    </div>
+  </div>
+
+  <main class="letter-wrap">
+    <section class="letter-card">
+      <span class="corner tl" aria-hidden="true"></span>
+      <span class="corner tr" aria-hidden="true"></span>
+      <span class="corner bl" aria-hidden="true"></span>
+      <span class="corner br" aria-hidden="true"></span>
+
+      <!-- Meme ABOVE everything (smaller) -->
+      <img class="meme meme-top" src="Meme3.jpeg" alt="Meme" />
+
+      <!-- Text BEFORE title (faded grey, centered) -->
+      <p class="pretitle">
+        Read the poem first. Then read the lyrics of the song called <strong>Ngozi</strong>.
+      </p>
+
+      <!-- Big red title -->
+      <h1 class="letter-title">MY WAY TO YOUR HEART</h1>
+
+      <!-- Poem -->
+      <div class="poem">
+        <p>
+          Each year my heart learns your name again, not as a stranger, but as something softer,
+          deeper, and more certain.
+        </p>
+
+        <p>
+          Loving you doesn’t fade with time. It grows quietly, like roots reaching further underground,
+          stronger than they were before.
+        </p>
+
+        <p>
+          I still remember the first time I saw you. I paused. I wondered, “Who is she?”
+          There was something in me that needed to know you, needed to understand the light behind your eyes.
+        </p>
+
+        <p>
+          And what amazes me most is that the feeling I had then is the feeling I carry now, only fuller,
+          warmer, and real.
+        </p>
+
+        <p>
+          I love your softness, the gentleness in your spirit. I love your beauty, the kind that isn’t just
+          seen, but felt. I love your entire being: the way you think, the way you move through the world,
+          the way you are simply… you.
+        </p>
+
+        <p>
+          I want to yearn for your love every single day. Not out of fear of losing it, but because loving you
+          is something I choose again and again.
+        </p>
+
+        <p>
+          Doing things like this for you makes me happy. It reminds me that my heart is exactly where it wants
+          to be.
+        </p>
+
+        <p class="closing">
+          I love you, Ngozi. More each year. More than yesterday. Always.
+        </p>
+
+        <p class="signature">— Daniel</p>
+      </div>
+
+      <!-- Ngozi video -->
+      <div class="video-block">
+        <video id="ngoziVideo" class="ngozi" playsinline loop preload="auto" controls>
+          <source src="Ngozi.mp4" type="video/mp4" />
+        </video>
+        <p class="tiny-note">If it doesn’t start with sound, tap anywhere once.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Menu
+    const hamburger = document.getElementById("hamburger");
+    const overlay = document.getElementById("menuOverlay");
+    const closeMenu = document.getElementById("closeMenu");
+
+    function openMenu() {
+      overlay.classList.add("open");
+      overlay.setAttribute("aria-hidden", "false");
+      hamburger.setAttribute("aria-expanded", "true");
+      document.body.classList.add("no-scroll");
+    }
+    function closeIt() {
+      overlay.classList.remove("open");
+      overlay.setAttribute("aria-hidden", "true");
+      hamburger.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("no-scroll");
+    }
+    hamburger?.addEventListener("click", openMenu);
+    closeMenu?.addEventListener("click", closeIt);
+    overlay?.addEventListener("click", (e) => { if (e.target === overlay) closeIt(); });
+
+    // Autoplay Ngozi WITH SOUND attempt
+    const ngozi = document.getElementById("ngoziVideo");
+
+    async function tryAutoplayWithSound() {
+      try {
+        ngozi.muted = false;     // try sound
+        await ngozi.play();
+      } catch (e) {
+        // fallback: autoplay muted (allowed)
+        try {
+          ngozi.muted = true;
+          await ngozi.play();
+        } catch (e2) {}
+      }
+    }
+
+    window.addEventListener("load", tryAutoplayWithSound);
+
+    // If browser blocks sound, first tap anywhere will unmute + play
+    document.addEventListener("click", async () => {
+      try {
+        ngozi.muted = false;
+        await ngozi.play();
+      } catch (e) {}
+    }, { once: true });
+  </script>
+</body>
+</html>

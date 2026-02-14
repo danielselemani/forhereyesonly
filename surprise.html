@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Surprise</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="page-pink">
+    <!-- Header / Nav -->
+<header class="header">
+  <a class="brand" href="index.html">💌 Daniel</a>
+
+  <nav class="nav-desktop" aria-label="Primary navigation">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link active" href="surprise.html">Surprise</a>
+    <a class="nav-link" href="her.html">Her</a>
+    <a class="nav-link" href="read-this-out-loud.html">Read This Out Loud</a>
+    <a class="nav-link" href="meet-me-here.html">Meet Me Here</a>
+  </nav>
+
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- Mobile Menu Overlay -->
+<div class="menu-overlay" id="menuOverlay" aria-hidden="true">
+  <div class="menu-panel pink-menu">
+    <button class="close" id="closeMenu" aria-label="Close menu">✕</button>
+
+    <div class="menu-links">
+      <a href="index.html" class="menu-link">Home</a>
+      <a href="surprise.html" class="menu-link">Surprise</a>
+      <a href="her.html" class="menu-link">Her</a>
+      <a href="read-this-out-loud.html" class="menu-link">Read This Out Loud</a>
+      <a href="meet-me-here.html" class="menu-link">Meet Me Here</a>
+    </div>
+
+    <p class="menu-note">Tany & Daniel 💗</p>
+  </div>
+</div>
+
+  <!-- Floating petals -->
+  <div class="petals" aria-hidden="true">
+    <span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span>
+    <span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span>
+    <span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span>
+  </div>
+
+  <main class="surprise-wrap">
+
+    <section class="video-section">
+      <!-- Center video -->
+      <div class="video-container">
+        <video
+          id="toniVideo"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+        >
+          <source src="ToniBraxton.mp4" type="video/mp4" />
+        </video>
+
+        <button id="unmuteBtn" class="unmute-btn" type="button">
+          Tap to play with sound 🔊
+        </button>
+
+        <p class="keep">keep scrolling ↓</p>
+      </div>
+
+      <!-- Right panel (desktop) -->
+      <aside class="song-panel">
+        <p class="now">NOW PLAYING</p>
+        <h2>Spanish Guitar — Toni Braxton</h2>
+
+        <!-- NOTE: I can't paste full lyrics. Keep this short. -->
+        <p class="excerpt">
+          “I wish that I was in your arms like that Spanish guitar…”
+        </p>
+
+        <p class="vibe">
+          Soft longing, closeness, and that “hold me all night” feeling.
+        </p>
+      </aside>
+    </section>
+
+    <!-- Collage -->
+    <section class="collage-section">
+      <img src="TanyAndi.png" alt="Tany and Daniel collage" class="collage" />
+    </section>
+
+    <!-- Love letter image -->
+    <section class="letter-section">
+      <img src="loveletter.jpg" alt="Love letter" class="letter" />
+    </section>
+
+  </main>
+
+  <script>
+    const video = document.getElementById("toniVideo");
+    const btn = document.getElementById("unmuteBtn");
+
+    // If the video file isn't found, show an obvious message
+    video.addEventListener("error", () => {
+      btn.textContent = "Video not found — check: ToniBraxton.mp4";
+      btn.style.display = "block";
+    });
+
+    btn.addEventListener("click", async () => {
+      video.muted = false;
+      try { await video.play(); } catch (e) {}
+      btn.style.display = "none";
+    });
+
+    // Helps on desktop: first click anywhere starts playback
+    document.addEventListener("click", async () => {
+      try { await video.play(); } catch(e) {}
+    }, { once: true });
+  </script>
+  <script>
+  // Hamburger menu
+  const hamburger = document.getElementById("hamburger");
+  const overlay = document.getElementById("menuOverlay");
+  const closeMenu = document.getElementById("closeMenu");
+
+  function openMenu() {
+    overlay.classList.add("open");
+    overlay.setAttribute("aria-hidden", "false");
+    hamburger.setAttribute("aria-expanded", "true");
+    document.body.classList.add("no-scroll");
+  }
+  function closeIt() {
+    overlay.classList.remove("open");
+    overlay.setAttribute("aria-hidden", "true");
+    hamburger.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("no-scroll");
+  }
+
+  hamburger?.addEventListener("click", openMenu);
+  closeMenu?.addEventListener("click", closeIt);
+  overlay?.addEventListener("click", (e) => {
+    if (e.target === overlay) closeIt();
+  });
+</script>
+
+</body>
+</html>

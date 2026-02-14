@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meet Me Here</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="page-sky">
+  <!-- Stars -->
+  <div class="stars-static" aria-hidden="true"></div>
+
+  <!-- MENU -->
+  <header class="header">
+    <a class="brand" href="index.html">💌 Daniel</a>
+
+    <nav class="nav-desktop" aria-label="Primary navigation">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="surprise.html">Surprise</a>
+      <a class="nav-link" href="her.html">Her</a>
+      <a class="nav-link" href="read-this-out-loud.html">Read This Out Loud</a>
+      <a class="nav-link active" href="meet-me-here.html">Meet Me Here</a>
+    </nav>
+
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
+    <div class="menu-panel sky-menu">
+      <button class="close" id="closeMenu" aria-label="Close menu">✕</button>
+
+      <div class="menu-links">
+        <a href="index.html" class="menu-link">Home</a>
+        <a href="surprise.html" class="menu-link">Surprise</a>
+        <a href="her.html" class="menu-link">Her</a>
+        <a href="read-this-out-loud.html" class="menu-link">Read This Out Loud</a>
+        <a href="meet-me-here.html" class="menu-link">Meet Me Here</a>
+      </div>
+
+      <p class="menu-note">Tonight in the stars ✨</p>
+    </div>
+  </div>
+
+  <!-- Background music (MP4 used as audio) -->
+  <audio id="bgMusic" loop preload="auto" muted>
+    <source src="Absolutely.mp4" type="audio/mp4" />
+  </audio>
+
+  <main class="sky-wrap">
+    <section class="sky-hero">
+      <p class="quote">“Her eyes feel like countless stars.”</p>
+
+      <h1 class="invite-title">Meet me here.</h1>
+
+      <p class="invite-text">
+        This is my invitation to a call, so we can watch <strong>The Perfect Find</strong> together
+        today at any convenient time when you see this.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn-sky" id="trailerBtn" type="button">Click to see trailer</button>
+        <button class="btn-sky ghost" id="musicBtn" type="button">Play music 🎵</button>
+      </div>
+
+      <!-- Tiny helper text -->
+      <p class="tap-note" id="tapNote">Tap anywhere once to turn the music on 💗</p>
+
+      <!-- Trailer frame (hidden until button click) -->
+      <div class="frame hidden" id="trailerFrame">
+        <video id="trailerVideo" class="video" playsinline controls preload="auto">
+          <source src="ThePerfectFind.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </section>
+
+    <!-- Two videos frame -->
+    <section class="section">
+      <h2 class="section-title">Two little moments</h2>
+
+      <div class="frame grid-2">
+        <video class="video" playsinline controls preload="auto">
+          <source src="Meme1.mp4" type="video/mp4" />
+        </video>
+
+        <video class="video" playsinline controls preload="auto">
+          <source src="Meme2.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </section>
+
+    <!-- Scrolling photo strip -->
+    <section class="section">
+      <h2 class="section-title">A little gallery</h2>
+
+      <div class="strip-frame">
+        <div class="strip" aria-label="Scrolling photos">
+          <img src="Bouteille.jpeg" alt="Photo 1" />
+          <img src="Meme4.jpg" alt="Photo 2" />
+          <img src="Meme5.jpg" alt="Photo 3" />
+          <img src="Meme6.jpg" alt="Photo 4" />
+          <img src="Meme7.jpg" alt="Photo 5" />
+          <img src="Meme8.jpg" alt="Photo 6" />
+          <img src="Meme9.jpg" alt="Photo 7" />
+          <img src="Meme10.jpg" alt="Photo 8" />
+          <img src="Meme11.jpg" alt="Photo 9" />
+          <img src="Meme12.jpg" alt="Photo 10" />
+          <img src="Meme13.jpg" alt="Photo 11" />
+
+          <!-- repeat once for seamless loop -->
+          <img src="Bouteille.jpeg" alt="Photo 1 repeat" />
+          <img src="Meme4.jpg" alt="Photo 2 repeat" />
+          <img src="Meme5.jpg" alt="Photo 3 repeat" />
+          <img src="Meme6.jpg" alt="Photo 4 repeat" />
+          <img src="Meme7.jpg" alt="Photo 5 repeat" />
+          <img src="Meme8.jpg" alt="Photo 6 repeat" />
+          <img src="Meme9.jpg" alt="Photo 7 repeat" />
+          <img src="Meme10.jpg" alt="Photo 8 repeat" />
+          <img src="Meme11.jpg" alt="Photo 9 repeat" />
+          <img src="Meme12.jpg" alt="Photo 10 repeat" />
+          <img src="Meme13.jpg" alt="Photo 11 repeat" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // ===== MENU =====
+    const hamburger = document.getElementById("hamburger");
+    const overlay = document.getElementById("menuOverlay");
+    const closeMenu = document.getElementById("closeMenu");
+
+    function openMenu() {
+      overlay.classList.add("open");
+      overlay.setAttribute("aria-hidden", "false");
+      hamburger.setAttribute("aria-expanded", "true");
+      document.body.classList.add("no-scroll");
+    }
+
+    function closeIt() {
+      overlay.classList.remove("open");
+      overlay.setAttribute("aria-hidden", "true");
+      hamburger.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("no-scroll");
+    }
+
+    hamburger?.addEventListener("click", openMenu);
+    closeMenu?.addEventListener("click", closeIt);
+    overlay?.addEventListener("click", (e) => { if (e.target === overlay) closeIt(); });
+
+    // ===== TRAILER REVEAL =====
+    const trailerBtn = document.getElementById("trailerBtn");
+    const trailerFrame = document.getElementById("trailerFrame");
+    const trailerVideo = document.getElementById("trailerVideo");
+
+    trailerBtn.addEventListener("click", async () => {
+      trailerFrame.classList.remove("hidden");
+      trailerFrame.scrollIntoView({ behavior: "smooth", block: "center" });
+      try { await trailerVideo.play(); } catch(e) {}
+    });
+
+    // ===== MUSIC (Absolutely.mp4) =====
+    const music = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
+    const tapNote = document.getElementById("tapNote");
+
+    // lower volume
+    music.volume = 0.2;
+
+    // Try autoplay muted (allowed sometimes)
+    async function tryAutoplayMuted() {
+      try {
+        music.muted = true;
+        await music.play();
+      } catch (e) {}
+    }
+    window.addEventListener("load", tryAutoplayMuted);
+
+    // Enable sound after first interaction
+    async function enableSound() {
+      try {
+        music.muted = false;
+        music.volume = 0.2;
+        await music.play();
+        if (tapNote) tapNote.style.display = "none";
+      } catch (e) {}
+    }
+
+    document.addEventListener("click", enableSound, { once: true });
+    musicBtn?.addEventListener("click", enableSound);
+  </script>
+</body>
+</html>
